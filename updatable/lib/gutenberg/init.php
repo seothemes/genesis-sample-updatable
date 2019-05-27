@@ -109,7 +109,7 @@ add_theme_support(
 	$genesis_sample_block_editor_settings['editor-color-palette']
 );
 
-require_once get_stylesheet_directory() . '/lib/gutenberg/inline-styles.php';
+require_once get_stylesheet_directory() . '/updatable/lib/gutenberg/inline-styles.php';
 
 add_action( 'after_setup_theme', 'genesis_sample_content_width', 0 );
 /**
