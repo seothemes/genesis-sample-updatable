@@ -1,50 +1,65 @@
-# Genesis Sample Theme
+# Genesis Sample Theme with Automatic Updates
 
-GitHub project link: https://github.com/studiopress/genesis-sample/.
+Proof of concept for allowing automatic updates in the Genesis Sample theme without losing customizations.
 
 
 ## Installation Instructions
 
-1. Upload the Genesis Sample theme folder via FTP to your wp-content/themes/ directory. (The Genesis parent theme needs to be in the wp-content/themes/ directory as well.)
-2. Go to your WordPress dashboard and select Appearance.
-3. Activate the Genesis Sample theme.
-4. Inside your WordPress dashboard, go to Genesis > Theme Settings and configure them to your liking.
+1. Install the Genesis Framework parent theme on your testing site.
+2. Download the [version 1.0.0](https://github.com/seothemes/genesis-sample-updatable/archive/1.0.0.zip) release and upload it to your testing site.
+3. Go to your WordPress dashboard and select Appearance, then activate the Genesis Sample theme.
+4. Inside your WordPress dashboard, go to Appearance > Theme Editor and select Genesis Sample theme.
+5. Add a custom code snippet to the style.css file and/or the functions.php file.
+6. Navigate to Appearance > Themes, there should now be an update notice showing for version 2.0.0.
+7. Click update and once it has finished running, refresh the page.
+8. There should now be 3 themes - Genesis, Genesis Sample and Genesis Sample 1.0.0 Backup.
+9. Navigate to Appearance > Theme Editor and select the new Genesis Sample theme.
+10. Check that your custom code snippets were carried over to the new version.
 
-## Theme Support
+## FAQs
 
-Please visit https://my.studiopress.com/help/ for theme support.
+### How does it prevent customizations being lost?
 
-## For Developers
+Magic!
 
-The version of [Genesis Sample on GitHub](https://github.com/studiopress/genesis-sample/) includes tooling to check code against WordPress standards. To use it:
+Actually, it works like this:
 
-1. Install Composer globally on your development machine. [See Composer setup steps](https://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable).
-2. In the command line, change directory to the Genesis Sample folder.
-3. Type the command `composer install` to install PHP development dependencies.
-4. Type `composer phpcs` to run coding standards checks.
+1. Before running the update, a full backup of the original theme is made.
+2. After the update has finished, the version number in the backup style.css file is updated.
+3. Then, all of the files in the backup are copied over to the new version - excluding the `updatable/` folder.
 
-You'll see output highlighting issues with PHP files that do not conform to Genesis Sample coding standards.
+By using the `updatable` directory method, the child theme can be used for it's intended purpose and allows the following things to happen:
 
-### npm scripts
+1. User can add custom CSS to style.css.
+2. User can add custom PHP code snippets to functions.php.
+3. User can add custom JS to a file, e.g script.js.
+4. User can add custom page templates with full access to the template hierarchy.
+5. User can add custom PHP files and include them in functions.php.
+6. User can add custom theme name, and even rename the theme folder.
+7. User can add custom screenshot image.
 
-Scripts are also provided to help with CSS linting, CSS autoprefixing, and creation of pot language files. To use them:
+Usually, none of this is possible because all of these customizations would be overwritten during the update process. By placing all updatable code in a specific folder, the rest of the theme is free for the user to customize.
 
-1. Install [Node.js](https://nodejs.org/), which also gives you the Node Package Manager (npm).
-2. In the command line, change directory to the Genesis Sample folder.
-3. Type the command `npm install` to install dependencies.
+### Why can't I see the `updatable` folder in the Theme Editor?
 
-You can then type any of these commands:
+This example theme includes a custom function which hides the `updatable` folder from the WordPress Admin Theme Editor. This would most likely be used in real world themes to prevent the majority of users finding and editing this directory. Add the following code snippet to functions.php to enable the directory in the theme editor:
 
-- `npm run autoprefixer` to add and remove vendor prefixes in `style.css`.
-- `npm run makepot` to regenerate the `languages/genesis-sample.pot` file.
-- `npm run lint:css` to generate a report of style violations for `style.css`.
-- `npm run lint:js` to generate a report of style violations for JavaScript files.
-- `npm run fix:js` to fix any JavaScript style violations that can be corrected automatically.
-- `npm run zip` to create a genesis-sample.zip. Files in the `excludes` array in `scripts/makezip.js` are omitted.
+```php
+remove_filter( 'theme_scandir_exclusions', 'genesis_sample_scandir_exclusions' );
+```
 
-### Packaging for distribution
+### Why is the config directory not in `updatable`?
 
-1. Follow the install instructions for npm scripts above.
-2. Switch to the git branch you plan to distribute.
-3. Bump version numbers manually and commit those changes.
-4. Type `npm run zip` to create `genesis-sample.zip`. Files in the `excludes` array in `scripts/makezip.js` are omitted from the zip. `filename.md` files will be renamed to `filename.txt`.
+Ideally the `config` directory would also be placed inside the `updatable` directory. Currently there are no available filters for changing the location of the theme config files so it needs to be located in the theme root directory. Hopefully some filters are added in a future version of Genesis to allow the config directory to be moved.
+
+### How do I know if `updatable` was updated?
+
+Follow the steps below to check that the updatable directory was correctly updated:
+
+1. Follow steps 1 to 5 in the [Installation Instructions](#installation-instructions) above.
+2. Before updating, add a code snippet to the `/updatable/style.css` file (not the style.css file in the root directory).
+3. Run the update.
+4. Navigate to Appearance > Theme Editor and select the new Genesis Sample theme.
+5. Open the `updatable/style.css` file and check if the code snippet is there.
+
+If the custom code snippet is not there then the update was successful.
