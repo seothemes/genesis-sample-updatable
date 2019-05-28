@@ -10,6 +10,8 @@
  * @link    https://www.studiopress.com/
  */
 
+// This line only exists in version 2.0.0.
+
 // Starts the engine.
 require_once get_template_directory() . '/lib/init.php';
 
