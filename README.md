@@ -64,3 +64,6 @@ In version 2.0.0 of this theme, there is a comment on [line 13](https://github.c
 
 When you download version 1.0.0 and open the `updatable/functions.php` file, you will notice that the comment is not there. After updating to 2.0.0, you can open this file and check if the comment has been added. If you now see the comment then the update was successful - the `updatable` directory was overwritten.
 
+### Update failed: Theme already at latest version.
+
+This happens when the child theme folder is not `genesis-sample-updatable`. Renaming the folder back to this will fix the issue. While it is possible to rename the theme folder using the Child Theme Updater, it's not implemented in this example project.
