@@ -64,8 +64,3 @@ In version 2.0.0 of this theme, there is a comment on [line 13](https://github.c
 
 When you download version 1.0.0 and open the `updatable/functions.php` file, you will notice that the comment is not there. After updating to 2.0.0, you can open this file and check if the comment has been added. If you now see the comment then the update was successful - the `updatable` directory was overwritten.
 
-### Why do the theme scripts and styles not load?
-
-In this example, we have 2 versions of the Genesis Sample theme - 1.0.0 and 2.0.0. You will probably notice that there are some bugs in version 1.0.0 - this is OK, they will be fixed when you update to version 2.0.0. The asset paths are intentionally broken in version 1.0.0 to show how the automatic updates can fix typical bugs without losing customizations.
-
-
