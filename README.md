@@ -54,12 +54,12 @@ Ideally the `config` directory would also be placed inside the `updatable` direc
 
 ### How do I know if `updatable` was updated?
 
-Follow the steps below to check that the updatable directory was correctly updated:
+In version 2.0.0 of this theme, there is a comment on [line 13](https://github.com/seothemes/genesis-sample-updatable/blob/develop/updatable/functions.php#L13) of the `updatable/functions.php`:
 
-1. Follow steps 1 to 5 in the [Installation Instructions](#installation-instructions) above.
-2. Before updating, add a code snippet to the `/updatable/style.css` file (not the style.css file in the root directory).
-3. Run the update.
-4. Navigate to Appearance > Theme Editor and select the new Genesis Sample theme.
-5. Open the `updatable/style.css` file and check if the code snippet is there.
+```php
+// This line only exists in version 2.0.0.
+```
 
-If the custom code snippet is not there then the update was successful.
+When you download version 1.0.0 and open the `updatable/functions.php` file, you will notice that the comment is not there. After updating to 2.0.0, you can open this file and check if the comment has been added. If you now see the comment then the update was successful - the `updatable` directory was overwritten.
+
+
