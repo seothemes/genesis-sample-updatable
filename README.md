@@ -40,6 +40,14 @@ By using the `updatable` directory method, the child theme can be used for it's 
 
 Usually, none of this is possible because all of these customizations would be overwritten during the update process. By placing all updatable code in a specific folder, the rest of the theme is free for the user to customize.
 
+### Why can't I see the `updatable` folder in the Theme Editor?
+
+This example theme includes a custom function which hides the `updatable` folder from the WordPress Admin Theme Editor. This would most likely be used in real world themes to prevent the majority of users finding and editing this directory. Add the following code snippet to functions.php to enable the directory in the theme editor:
+
+```php
+remove_filter( 'theme_scandir_exclusions', 'genesis_sample_scandir_exclusions' );
+```
+
 ### Why is the config directory not in `updatable`?
 
 Ideally the `config` directory would also be placed inside the `updatable` directory. Currently there are no available filters for changing the location of the theme config files so it needs to be located in the theme root directory. Hopefully some filters are added in a future version of Genesis to allow the config directory to be moved.
