@@ -58,7 +58,7 @@ function genesis_sample_plugin_update_checker() {
 	}
 
 	$defaults = \apply_filters( 'genesis_sample_update_checker', [
-		'repo'   => 'https://github.com/studiopress/genesis-sample/',
+		'repo'   => 'https://github.com/seothemes/genesis-sample-updatable/',
 		'file'   => \get_stylesheet_directory(),
 		'theme'  => \get_stylesheet(),
 		'token'  => '',
