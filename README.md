@@ -8,7 +8,7 @@ __Important:__ This project is for demonstration purposes only and should not be
 ## Installation Instructions
 
 1. Install the Genesis Framework parent theme on your testing site.
-2. Download the [version 1.0.0](https://github.com/seothemes/genesis-sample-updatable/archive/1.0.0.zip) release and upload it to your testing site.
+2. Download the [version 1.0.0](https://github.com/seothemes/genesis-sample-updatable/releases/download/1.0.0/genesis-sample-updatable.zip) release and upload it to your testing site.
 3. Go to your WordPress dashboard and select Appearance, then activate the Genesis Sample theme.
 4. Inside your WordPress dashboard, go to Appearance > Theme Editor and select Genesis Sample theme.
 5. Add a custom code snippet to the style.css file and/or the functions.php file.
