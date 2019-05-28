@@ -10,8 +10,6 @@
  * @link    https://www.studiopress.com/
  */
 
-// This line only exists in version 2.0.0.
-
 // Starts the engine.
 require_once get_template_directory() . '/lib/init.php';
 
@@ -79,17 +77,25 @@ function genesis_sample_enqueue_scripts_styles() {
 	wp_enqueue_style(
 		'genesis-sample-fonts',
 		'//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700',
-		array(),
+		[],
 		CHILD_THEME_VERSION
 	);
 
 	wp_enqueue_style( 'dashicons' );
 
+	wp_enqueue_style(
+		'genesis-sample-updatable',
+		get_stylesheet_directory_uri() . "/updatable/style.css",
+		[],
+		CHILD_THEME_VERSION,
+		'all'
+	);
+
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	wp_enqueue_script(
 		'genesis-sample-responsive-menu',
-		get_stylesheet_directory_uri() . "/js/responsive-menus{$suffix}.js",
-		array( 'jquery' ),
+		get_stylesheet_directory_uri() . "/updatable/js/responsive-menus{$suffix}.js",
+		[ 'jquery' ],
 		CHILD_THEME_VERSION,
 		true
 	);
@@ -109,18 +115,18 @@ function genesis_sample_enqueue_scripts_styles() {
  */
 function genesis_sample_responsive_menu_settings() {
 
-	$settings = array(
+	$settings = [
 		'mainMenu'         => __( 'Menu', 'genesis-sample' ),
 		'menuIconClass'    => 'dashicons-before dashicons-menu',
 		'subMenu'          => __( 'Submenu', 'genesis-sample' ),
 		'subMenuIconClass' => 'dashicons-before dashicons-arrow-down-alt2',
-		'menuClasses'      => array(
-			'combine' => array(
+		'menuClasses'      => [
+			'combine' => [
 				'.nav-primary',
-			),
-			'others'  => array(),
-		),
-	);
+			],
+			'others'  => [],
+		],
+	];
 
 	return $settings;
 
@@ -150,6 +156,7 @@ add_filter( 'genesis_seo_title', 'genesis_sample_header_title', 10, 3 );
  * @param string $title  The full title.
  * @param string $inside The content inside the title element.
  * @param string $wrap   The wrapping element name, such as h1.
+ *
  * @return string The site title with anchor removed if a custom logo is active.
  */
 function genesis_sample_header_title( $title, $inside, $wrap ) {
@@ -211,12 +218,14 @@ add_filter( 'genesis_customizer_theme_settings_config', 'genesis_sample_remove_c
  * @since 2.6.0
  *
  * @param array $config Original Customizer items.
+ *
  * @return array Filtered Customizer items.
  */
 function genesis_sample_remove_customizer_settings( $config ) {
 
 	unset( $config['genesis']['sections']['genesis_header'] );
 	unset( $config['genesis']['sections']['genesis_breadcrumbs']['controls']['breadcrumb_front_page'] );
+
 	return $config;
 
 }
@@ -239,6 +248,7 @@ add_filter( 'wp_nav_menu_args', 'genesis_sample_secondary_menu_args' );
  * @since 2.2.3
  *
  * @param array $args Original menu options.
+ *
  * @return array Menu options with depth set to 1.
  */
 function genesis_sample_secondary_menu_args( $args ) {
@@ -248,6 +258,7 @@ function genesis_sample_secondary_menu_args( $args ) {
 	}
 
 	$args['depth'] = 1;
+
 	return $args;
 
 }
@@ -259,6 +270,7 @@ add_filter( 'genesis_author_box_gravatar_size', 'genesis_sample_author_box_grava
  * @since 2.2.3
  *
  * @param int $size Original icon size.
+ *
  * @return int Modified icon size.
  */
 function genesis_sample_author_box_gravatar( $size ) {
@@ -274,11 +286,13 @@ add_filter( 'genesis_comment_list_args', 'genesis_sample_comments_gravatar' );
  * @since 2.2.3
  *
  * @param array $args Gravatar settings.
+ *
  * @return array Gravatar settings with modified size.
  */
 function genesis_sample_comments_gravatar( $args ) {
 
 	$args['avatar_size'] = 60;
+
 	return $args;
 
 }

@@ -18,7 +18,7 @@ function genesis_sample_enqueue_gutenberg_frontend_styles() {
 
 	wp_enqueue_style(
 		'genesis-sample-gutenberg',
-		get_stylesheet_directory_uri() . '/lib/gutenberg/front-end.css',
+		get_stylesheet_directory_uri() . '/updatable/lib/gutenberg/front-end.css',
 		array( CHILD_THEME_HANDLE ),
 		CHILD_THEME_VERSION
 	);
