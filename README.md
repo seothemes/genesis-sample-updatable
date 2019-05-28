@@ -16,3 +16,18 @@ Proof of concept for allowing automatic updates in the Genesis Sample theme with
 9. Navigate to Appearance > Theme Editor and select the new Genesis Sample theme.
 10. Check that your custom code snippets were carried over to the new version.
 
+## Why is the config directory not in `updatable`?
+
+Ideally the `config` directory would also be placed inside the `updatable` directory. Currently there are no available filters for changing the location of the theme config files so it needs to be located in the theme root directory. Hopefully some filters are added in a future version of Genesis to allow the config directory to be moved.
+
+## How do I know if `updatable` was updated?
+
+Follow the steps below to check that the updatable directory was correctly updated:
+
+1. Follow steps 1 to 5 in the [Installation Instructions](#installation-instructions) above.
+2. Before updating, add a code snippet to the `/updatable/style.css` file (not the style.css file in the root directory).
+3. Run the update.
+4. Navigate to Appearance > Theme Editor and select the new Genesis Sample theme.
+5. Open the `updatable/style.css` file and check if the code snippet is there.
+
+If the custom code snippet is not there then the update was successful.
